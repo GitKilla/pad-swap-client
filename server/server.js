@@ -7,7 +7,10 @@ const port = process.env.PORT || 5000;
 app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
-   res.redirect('https://' + req.headers.host + req.url);
+   if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
+      res.redirect('https://' + req.get(host) + req.url);
+   }
+   
    res.sendFile(path.join(publicPath, 'index.html'));
 });
 
