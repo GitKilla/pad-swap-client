@@ -4,7 +4,7 @@ const app = express();
 const publicPath = path.join(__dirname, '..', 'build');
 const port = process.env.PORT || 5000;
 
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
    console.log("=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]");
