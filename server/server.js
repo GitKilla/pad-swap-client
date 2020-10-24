@@ -15,6 +15,7 @@ app.get('*', (req, res) => {
       res.redirect('https://' + req.headers.host + req.url);
       console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
    } else {
+      console.log("=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>");
       res.sendFile(path.join(publicPath, 'index.html'));
    }
 });
