@@ -4,7 +4,7 @@ const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
 const port = process.env.PORT || 5000;
 
-// app.use(express.static(publicPath));
+app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
    console.log("=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]=-]");
@@ -15,6 +15,8 @@ app.get('*', (req, res) => {
       res.redirect('https://' + req.headers.host + req.url);
       console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
    } else {
+      console.log("=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>");
+      console.log("public path: "+publicPath);
       console.log("=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>");
       res.sendFile(path.join(publicPath, 'index.html'));
    }
