@@ -39,7 +39,8 @@ class App extends Component {
             askedNFTIds: [],
             activePage: "barter",
             offerArray: [],
-            askArray: []
+            askArray: [],
+            ethOffer: null
           };
 
   componentDidMount = async () => {
@@ -51,7 +52,7 @@ class App extends Component {
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       const primaryAddress = accounts[0];
-      web3.eth.defaultAccount = web3.eth.accounts[0]
+      web3.eth.defaultAccount = web3.eth.accounts[0];
 
 
       // Get the Test NFT contract instance.
@@ -312,6 +313,10 @@ class App extends Component {
     
   };
 
+  handleEthOfferChange = (event) => {
+    console.log("Gothere")
+    this.setState({ethOffer: event.target.value});
+  };
 
   render() {
     
@@ -344,7 +349,7 @@ class App extends Component {
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
 
-          <form onSubmit={this.handleSubmit}>
+          <form onChange={this.handleEthOfferChange}>
               <FormGroup>
                 <div>&nbsp;</div>
                 <TextField 
@@ -355,7 +360,7 @@ class App extends Component {
               </FormGroup>
             </form>
             </Grid>
-            
+
           <div>&nbsp;</div>
           <div>&nbsp;</div>
         
@@ -370,8 +375,8 @@ class App extends Component {
           >
           
           <NFTCardGrid 
-            offeredNFTIds={this.state.offeredNFTIds} 
-            pullNFTOffer={this.removeNFTfromOffered} 
+            offeredNFTIds={this.state.offeredNFTIds}
+            pullNFTOffer={this.removeNFTfromOffered}
             pushNFTOffer={this.addNFTToOffered}
             nftType={"offer"}
             numCards={this.state.numUserNFTs} 
