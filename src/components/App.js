@@ -349,12 +349,15 @@ class App extends Component {
                 <div>&nbsp;</div>
                 <TextField 
                   value={this.state.traderAddress} 
-                  id="outlined-basic" 
-                  label="Address" 
+                  id="center" 
+                  label="$ETH Offer" 
                   variant="outlined"  />
               </FormGroup>
             </form>
             </Grid>
+            
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
         
 
           <Grid container
@@ -365,17 +368,6 @@ class App extends Component {
             // xs={3}
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
-
-          <form onSubmit={this.handleSubmit}>
-              <FormGroup>
-                <div>&nbsp;</div>
-                <TextField 
-                  value={this.state.traderAddress} 
-                  id="outlined-basic" 
-                  label="Address" 
-                  variant="outlined"  />
-              </FormGroup>
-            </form>
           
           <NFTCardGrid 
             offeredNFTIds={this.state.offeredNFTIds} 
