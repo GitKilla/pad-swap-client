@@ -333,6 +333,28 @@ class App extends Component {
           </form>
           <div>&nbsp;</div>
           <div>&nbsp;</div>
+
+
+          <Grid container
+            spacing={1}
+            flexgrow={1}
+            alignItems="flex-start"
+            justify="space-evenly"
+            // xs={3}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
+          >
+
+          <form onSubmit={this.handleSubmit}>
+              <FormGroup>
+                <div>&nbsp;</div>
+                <TextField 
+                  value={this.state.traderAddress} 
+                  id="outlined-basic" 
+                  label="Address" 
+                  variant="outlined"  />
+              </FormGroup>
+            </form>
+            </Grid>
         
 
           <Grid container
@@ -341,7 +363,7 @@ class App extends Component {
             alignItems="flex-start"
             justify="space-evenly"
             // xs={3}
-            style={{ minHeight: '10vh', padding:'1'}}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
 
           <form onSubmit={this.handleSubmit}>
@@ -422,7 +444,7 @@ class App extends Component {
                 maxWidth: '80%'
                 , minWidth: '80%'
                 , minHeight: '30vh'
-                , maxHeight: '3=0vh'
+                , maxHeight: '30vh'
                 , paddingLeft: 0
                 , paddingTop: 10
                 , paddingBottom:10
