@@ -351,10 +351,9 @@ class App extends Component {
 
           <form onChange={this.handleEthOfferChange}>
               <FormGroup>
-                <div>&nbsp;</div>
                 <TextField 
                   value={this.state.traderAddress} 
-                  id="center" 
+                  id="ethoffer" 
                   label="$ETH Offer" 
                   variant="outlined"  />
               </FormGroup>
