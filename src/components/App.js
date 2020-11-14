@@ -344,7 +344,7 @@ class App extends Component {
             style={{ minHeight: '10vh', padding:'1'}}
           >
 
-          {/* <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <div>&nbsp;</div>
                 <TextField 
@@ -353,7 +353,7 @@ class App extends Component {
                   label="Address" 
                   variant="outlined"  />
               </FormGroup>
-            </form> */}
+            </form>
           
           <NFTCardGrid 
             offeredNFTIds={this.state.offeredNFTIds} 
