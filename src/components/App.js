@@ -314,8 +314,9 @@ class App extends Component {
   };
 
   handleEthOfferChange = (event) => {
-    console.log("Gothere")
+    
     this.setState({ethOffer: event.target.value});
+    console.log("Eth offer: "+this.state.ethOffer);
   };
 
   render() {
