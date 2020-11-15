@@ -261,7 +261,7 @@ class App extends Component {
       var offer = await this.getOfferData(offerId)
       var offerImages = []
       
-      for(var j = 0; j < offer[0].length; j++) {
+      for(var j = 0; j < offer[1].length; j++) {
         var res = await fetch('https://axieinfinity.com/api/v2/axies/'+String(offer[0][j]));
         res = await res.json();
         offerImages.push(res.image)
