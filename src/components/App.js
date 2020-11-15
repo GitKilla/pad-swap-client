@@ -311,14 +311,25 @@ class App extends Component {
     event.preventDefault();
     this.setState({traderAddress: event.target.value});
     console.log("Address: "+this.state.traderAddress);
-    console.log("Event value: "+this.state.event.target.value);
+    console.log("Event value: "+event.target.value);
   };
 
   handleEthOfferChange = (event) => {
     
-    this.setState({ethOffer: event.target.value});
+    const onlyNums = event.target.value.replace(/[^0-9]/g, '');
+    if (onlyNums.length < 10) {
+        this.setState({ value: onlyNums });
+    } else if (onlyNums.length === 10) {
+        const number = onlyNums.replace(
+            /(\d{3})(\d{3})(\d{4})/,
+            '($1) $2-$3'
+        );
+        this.setState({ ethOffer: number });
+    }
+
+    // this.setState({ethOffer: event.target.value});
     console.log("Eth offer: "+this.state.ethOffer);
-    console.log("Event value: "+this.state.event.target.value);
+    console.log("Event value: "+event.target.value);
   };
 
   render() {
