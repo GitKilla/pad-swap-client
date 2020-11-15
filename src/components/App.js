@@ -357,10 +357,10 @@ class App extends Component {
             alignItems="center"
             justify="space-evenly"
             // xs={3}
-            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
           
-          <Grid item>
+          <Grid item style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}>
           <form onChange={this.handleEthOfferChange}>
               <FormGroup>
                 <TextField 
@@ -373,7 +373,7 @@ class App extends Component {
             </form>
             </Grid>
 
-          <Grid item>
+          <Grid item style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}>
           {(!this.state.addressEntered) ? <div>hi</div> :
           <form onChange={this.handleEthAskChange}>
               <FormGroup>
