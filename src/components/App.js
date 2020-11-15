@@ -117,6 +117,7 @@ class App extends Component {
     event.preventDefault();
     var offerContractArr = [];
     var askContractArr = [];
+    const web3 = await getWeb3();
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
       offerContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
@@ -132,7 +133,7 @@ class App extends Component {
                                                                             ,askContractArr
                                                                             ,this.state.ethOffer
                                                                             ,this.state.ethAsk
-                                                                            ,this.state.traderAddress).send({from:this.state.userAddress})
+                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:web3.utils.toWei(this.state.ethOffer, 'ether')})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
       this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
