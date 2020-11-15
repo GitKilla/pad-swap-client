@@ -299,7 +299,7 @@ class App extends Component {
     const askLength = await contractSwap.methods.getOfferLengthFromAsk(offerId).call()
     var askIds = []
     // const numOffers = contractSwap.methods.offerCountByAddress(this.state.userAddress)
-    for(var i = 0; i < offerLength; i++) {
+    for(var i = 0; i < askLength; i++) {
       askIds.push (await contractSwap.methods.getOfferFromAsk(offerId, i).call())
     }
 
