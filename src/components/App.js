@@ -62,7 +62,7 @@ class App extends Component {
       const deployedNetworkTestNFT = TestNFTContract.networks[networkId];
       const instanceTestNFT = new web3.eth.Contract(
         TestNFTContract.abi,
-        "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8"
+        "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600"
       );
 
       console.log("Getting swap Contract");
@@ -70,7 +70,7 @@ class App extends Component {
       const deployedNetworkSwap = Swap.networks[networkId];
       const instanceSwap = new web3.eth.Contract(
         Swap.abi,
-        "0xB4d8dF80170C7Ff69971636089eAFBC64fc43C56",
+        "0x6fb4e27B03D0c6359B78aAC96950d05dBf598522",
       );
       
       console.log("Setting state");
@@ -122,11 +122,11 @@ class App extends Component {
     console.log("Break 1");
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
-      offerContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
+      offerContractArr[i] = "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600";//this.state.contractNFT.address;
     }
 
     for(var i = 0; i < this.state.askedNFTIds.length; i++) {
-      askContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
+      askContractArr[i] = "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600";//this.state.contractNFT.address;
     }
     console.log("Break 2");
     const _offerValue = ((parseInt(this.state.ethOffer)*(10**18)) || 0).toString();
