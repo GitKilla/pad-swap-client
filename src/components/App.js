@@ -40,7 +40,8 @@ class App extends Component {
             activePage: "barter",
             offerArray: [],
             askArray: [],
-            ethOffer: null
+            ethOffer: null,
+            ethAsk: null
           };
 
   componentDidMount = async () => {
@@ -321,6 +322,13 @@ class App extends Component {
     console.log("Event value: "+event.target.value);
   };
 
+  handleEthAskChange = async (event) => {
+
+    this.setState({ethAsk: event.target.value});
+    console.log("Eth ask: "+ await this.state.ethAsk);
+    console.log("Event value: "+event.target.value);
+  };
+
   render() {
     
     if (!this.state.web3) {
@@ -440,11 +448,11 @@ class App extends Component {
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
           >
 
-          <form onChange={this.handleEthOfferChange}>
+          <form onChange={this.handleEthAskChange}>
               <FormGroup>
                 <TextField 
-                  value={this.state.ethOffer} 
-                  id="ethoffer" 
+                  value={this.state.ethAsk} 
+                  id="ethask" 
                   label="$ETH Offer"
                   type="number" 
                   variant="outlined"  />
