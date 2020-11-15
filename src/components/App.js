@@ -318,14 +318,14 @@ class App extends Component {
   handleEthOfferChange = async (event) => {
 
     this.setState({ethOffer: event.target.value});
-    console.log("Eth offer: "+ await this.state.ethOffer);
+    console.log("Eth offer: "+ this.state.ethOffer);
     console.log("Event value: "+event.target.value);
   };
 
   handleEthAskChange = async (event) => {
 
     this.setState({ethAsk: event.target.value});
-    console.log("Eth ask: "+ await this.state.ethAsk);
+    console.log("Eth ask: "+ this.state.ethAsk);
     console.log("Event value: "+event.target.value);
   };
 
@@ -375,6 +375,15 @@ class App extends Component {
           <div>&nbsp;</div>
           <div>&nbsp;</div>
 
+          <Grid container
+            spacing={1}
+            flexgrow={1}
+            alignItems="center"
+            justify="space-evenly"
+            // xs={3}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
+          >
+
           {(!this.state.addressEntered) ? <div>hi</div> :
           <form onChange={this.handleEthAskChange}>
               <FormGroup>
@@ -387,7 +396,7 @@ class App extends Component {
               </FormGroup>
             </form>
             }
-          
+            </Grid>
             <div>&nbsp;</div>
         
 
