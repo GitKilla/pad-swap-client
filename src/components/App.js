@@ -394,6 +394,29 @@ class App extends Component {
             userNFTs={this.state.userNFTs} 
             maxWidth="40%" minWidth="40%"
             minHeight="60vh"></NFTCardGrid>
+{/* 
+          <Grid container
+            spacing={1}
+            flexgrow={1}
+            alignItems="center"
+            justify="space-evenly"
+            // xs={3}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
+          > */}
+          {(!this.state.addressEntered) ? <div>hi</div> :
+          <form onChange={this.handleEthAskChange}>
+              <FormGroup>
+                <TextField 
+                  value={this.state.ethAsk} 
+                  id="ethask" 
+                  label="$ETH Ask"
+                  type="number" 
+                  variant="outlined"  />
+              </FormGroup>
+            </form>
+            }
+          
+            <div>&nbsp;</div>
           
           
           {(!this.state.addressEntered) ? 
@@ -416,6 +439,9 @@ class App extends Component {
                 </form>
                 </Grid>
             : 
+
+            
+
             <NFTCardGrid 
               offeredNFTIds={this.state.askedNFTIds} 
               pullNFTOffer={this.removeNFTfromOffered} 
@@ -439,28 +465,9 @@ class App extends Component {
           <div>&nbsp;</div>
           <div>&nbsp;</div>
           <div>&nbsp;</div>
-          <Grid container
-            spacing={1}
-            flexgrow={1}
-            alignItems="center"
-            justify="space-evenly"
-            // xs={3}
-            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
-          >
 
-          <form onChange={this.handleEthAskChange}>
-              <FormGroup>
-                <TextField 
-                  value={this.state.ethAsk} 
-                  id="ethask" 
-                  label="$ETH Ask"
-                  type="number" 
-                  variant="outlined"  />
-              </FormGroup>
-            </form>
-            </Grid>
           
-            <div>&nbsp;</div>
+          
 
           <Grid container
             spacing={1}
