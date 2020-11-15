@@ -310,13 +310,15 @@ class App extends Component {
 
     event.preventDefault();
     this.setState({traderAddress: event.target.value});
-    
+    console.log("Address: "+this.state.traderAddress);
+    console.log("Event value: "+this.state.event.target.value);
   };
 
   handleEthOfferChange = (event) => {
     
     this.setState({ethOffer: event.target.value});
     console.log("Eth offer: "+this.state.ethOffer);
+    console.log("Event value: "+this.state.event.target.value);
   };
 
   render() {
