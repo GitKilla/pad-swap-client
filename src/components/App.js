@@ -434,6 +434,29 @@ class App extends Component {
           <Grid container
             spacing={1}
             flexgrow={1}
+            alignItems="center"
+            justify="space-evenly"
+            // xs={3}
+            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
+          >
+
+          <form onChange={this.handleEthOfferChange}>
+              <FormGroup>
+                <TextField 
+                  value={this.state.ethOffer} 
+                  id="ethoffer" 
+                  label="$ETH Offer"
+                  type="number" 
+                  variant="outlined"  />
+              </FormGroup>
+            </form>
+            </Grid>
+          
+            <div>&nbsp;</div>
+
+          <Grid container
+            spacing={1}
+            flexgrow={1}
             alignItems="flex-start"
             justify="space-evenly"
             // xs={3}
