@@ -114,7 +114,7 @@ class App extends Component {
   };
 
   proposeTrade = async (event) => { // add approval check beforehand
-    console.log("Break 0")
+    console.log("Break 0");
     event.preventDefault();
     var offerContractArr = [];
     var askContractArr = [];
@@ -134,9 +134,9 @@ class App extends Component {
                                                                             , offerContractArr
                                                                             ,this.state.askedNFTIds
                                                                             ,askContractArr
-                                                                            ,0//,this.state.ethOffer
-                                                                            ,0//,this.state.ethAsk
-                                                                            ,this.state.traderAddress).send({from:this.state.userAddress/*, value:web3.utils.toWei(this.state.ethOffer, 'ether')*/})
+                                                                            ,this.state.ethOffer
+                                                                            ,this.state.ethAsk
+                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:int(this.state.ethOffer)*(10**18)})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
       this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
