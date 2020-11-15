@@ -171,7 +171,8 @@ class App extends Component {
       arr.push(nftid)
       this.setState({askedNFTIds: arr});
     }
-
+    console.log("Asked NFTs: "+this.state.askedNFTIds);
+    console.log("Offered NFTs: "+this.state.offeredNFTIds);
   };
 
   removeNFTfromOffered = (type, nftid) => {
