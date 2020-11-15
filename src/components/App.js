@@ -133,8 +133,8 @@ class App extends Component {
                                                                             , offerContractArr
                                                                             ,this.state.askedNFTIds
                                                                             ,askContractArr
-                                                                            ,this.state.ethOffer
-                                                                            ,this.state.ethAsk
+                                                                            ,0//,this.state.ethOffer
+                                                                            ,0//,this.state.ethAsk
                                                                             ,this.state.traderAddress).send({from:this.state.userAddress, value:web3.utils.toWei(this.state.ethOffer, 'ether')})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
