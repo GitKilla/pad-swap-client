@@ -130,8 +130,8 @@ class App extends Component {
                                                                             , offerContractArr
                                                                             ,this.state.askedNFTIds
                                                                             ,askContractArr
-                                                                            ,0
-                                                                            ,0
+                                                                            ,this.state.ethOffer
+                                                                            ,this.state.ethAsk
                                                                             ,this.state.traderAddress).send({from:this.state.userAddress})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
@@ -374,11 +374,11 @@ class App extends Component {
             </Grid>
 
           <Grid item style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}>
-          {(!this.state.addressEntered) ? <div>hi</div> :
+          {(!this.state.addressEntered) ? <div></div> :
           <form onChange={this.handleEthAskChange}>
               <FormGroup>
                 <TextField 
-                  value={this.state.ethAsk} 
+                  value={this.state.ethAsk}
                   id="ethask" 
                   label="$ETH Ask"
                   type="number" 
