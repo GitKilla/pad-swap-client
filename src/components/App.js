@@ -359,7 +359,8 @@ class App extends Component {
             // xs={3}
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
           >
-
+          
+          <Grid item>
           <form onChange={this.handleEthOfferChange}>
               <FormGroup>
                 <TextField 
@@ -370,7 +371,9 @@ class App extends Component {
                   variant="outlined"  />
               </FormGroup>
             </form>
+            </Grid>
 
+          <Grid item>
           {(!this.state.addressEntered) ? <div>hi</div> :
           <form onChange={this.handleEthAskChange}>
               <FormGroup>
@@ -383,6 +386,7 @@ class App extends Component {
               </FormGroup>
             </form>
             }
+            </Grid>
             </Grid>
             <div>&nbsp;</div>
         
