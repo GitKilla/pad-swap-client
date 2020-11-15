@@ -114,10 +114,11 @@ class App extends Component {
   };
 
   proposeTrade = async (event) => { // add approval check beforehand
+    console.log("Break 0")
     event.preventDefault();
     var offerContractArr = [];
     var askContractArr = [];
-    const web3 = await getWeb3();
+    // const web3 = await getWeb3();
     console.log("Break 1");
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
@@ -308,6 +309,7 @@ class App extends Component {
     const traderNFTs = await this.getData(this.state.traderAddress);
 
     this.setState({addressEntered: true, traderNFTs: traderNFTs, numTraderNFTs: traderNFTs.length});
+    console.log("Event value: "+event.target.value);
     
   };
 
