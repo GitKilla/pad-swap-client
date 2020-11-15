@@ -129,15 +129,16 @@ class App extends Component {
       askContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
     }
     console.log("Break 2");
-    const _value = parseInt(this.state.ethOffer)*(10**18);
+    const _offerValue = parseInt(this.state.ethOffer)*(10**18);
+    const _askValue = parseInt(this.state.ethAsk)*(10**18);
     console.log("Eth offer - propose trade: "+parseInt(this.state.ethOffer)*(10**18));
     const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
                                                                             , offerContractArr
                                                                             ,this.state.askedNFTIds
                                                                             ,askContractArr
-                                                                            ,this.state.ethOffer || 0
-                                                                            ,this.state.ethAsk || 0
-                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:_value})
+                                                                            ,_offerValue || 0
+                                                                            ,_askValue || 0
+                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:_offerValue})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
       this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
