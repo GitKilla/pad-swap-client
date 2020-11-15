@@ -370,16 +370,6 @@ class App extends Component {
                   variant="outlined"  />
               </FormGroup>
             </form>
-            </Grid>
-
-          <Grid container
-            spacing={1}
-            flexgrow={1}
-            alignItems="center"
-            justify="space-evenly"
-            // xs={3}
-            style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
-          >
 
           {(!this.state.addressEntered) ? <div>hi</div> :
           <form onChange={this.handleEthAskChange}>
