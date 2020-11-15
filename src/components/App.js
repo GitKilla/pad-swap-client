@@ -118,6 +118,7 @@ class App extends Component {
     var offerContractArr = [];
     var askContractArr = [];
     const web3 = await getWeb3();
+    console.log("Break 1");
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
       offerContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
@@ -126,6 +127,7 @@ class App extends Component {
     for(var i = 0; i < this.state.askedNFTIds.length; i++) {
       askContractArr[i] = "0xed596F59AEa48F054a1e69147eC7c3dB351aA9a8";//this.state.contractNFT.address;
     }
+    console.log("Break 2");
     
     const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
                                                                             , offerContractArr
@@ -142,6 +144,7 @@ class App extends Component {
     for(var i = 0; i < this.state.askedNFTIds.length; i++) {
       this.removeNFTfromOffered("ask", this.state.askedNFTIds[i])
     }
+    console.log("Break 3");
   }
 
   acceptTrade = async (offerId) => { // add approval check beforehand
