@@ -134,8 +134,8 @@ class App extends Component {
                                                                             , offerContractArr
                                                                             ,this.state.askedNFTIds
                                                                             ,askContractArr
-                                                                            ,this.state.ethOffer
-                                                                            ,this.state.ethAsk
+                                                                            ,this.state.ethOffer || 0
+                                                                            ,this.state.ethAsk || 0
                                                                             ,this.state.traderAddress).send({from:this.state.userAddress, value:parseInt(this.state.ethOffer)*(10**18)})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
