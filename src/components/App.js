@@ -372,9 +372,6 @@ class App extends Component {
             </form>
             </Grid>
 
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-
           <Grid container
             spacing={1}
             flexgrow={1}
