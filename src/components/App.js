@@ -374,6 +374,21 @@ class App extends Component {
 
           <div>&nbsp;</div>
           <div>&nbsp;</div>
+
+          {(!this.state.addressEntered) ? <div>hi</div> :
+          <form onChange={this.handleEthAskChange}>
+              <FormGroup>
+                <TextField 
+                  value={this.state.ethAsk} 
+                  id="ethask" 
+                  label="$ETH Ask"
+                  type="number" 
+                  variant="outlined"  />
+              </FormGroup>
+            </form>
+            }
+          
+            <div>&nbsp;</div>
         
 
           <Grid container
@@ -403,21 +418,6 @@ class App extends Component {
             // xs={3}
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh', minWidth:'40%', maxWidth: '40%'}}
           > */}
-          {(!this.state.addressEntered) ? <div>hi</div> :
-          <form onChange={this.handleEthAskChange}>
-              <FormGroup>
-                <TextField 
-                  value={this.state.ethAsk} 
-                  id="ethask" 
-                  label="$ETH Ask"
-                  type="number" 
-                  variant="outlined"  />
-              </FormGroup>
-            </form>
-            }
-          
-            <div>&nbsp;</div>
-          
           
           {(!this.state.addressEntered) ? 
             <Grid
@@ -438,10 +438,7 @@ class App extends Component {
               </FormGroup>
                 </form>
                 </Grid>
-            : 
-
-            
-
+            :      
             <NFTCardGrid 
               offeredNFTIds={this.state.askedNFTIds} 
               pullNFTOffer={this.removeNFTfromOffered} 
