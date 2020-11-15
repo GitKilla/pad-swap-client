@@ -136,7 +136,7 @@ class App extends Component {
                                                                             ,askContractArr
                                                                             ,this.state.ethOffer
                                                                             ,this.state.ethAsk
-                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:int(this.state.ethOffer)*(10**18)})
+                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:parseInt(this.state.ethOffer)*(10**18)})
 
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
       this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
