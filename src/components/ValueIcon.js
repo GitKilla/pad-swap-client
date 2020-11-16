@@ -32,6 +32,7 @@ export default function MediaCard(props) {
 
   const classes = useStyles();
 
+  ethAmount = Math.round((props.ethVal/1000000000000000000)*1000)/1000;
 
   return (
     <Card className={classes.root} styles={{boxShadow:3}}>
@@ -56,7 +57,7 @@ export default function MediaCard(props) {
         </Grid>
         <Grid item>
           <p style={{fontFamily:'Arial', fontSize:12}}>
-            <b>{props.ethVal} ETH</b>
+            <b>{ethAmount} ETH</b>
             </p>
           </Grid>
         </Grid>
