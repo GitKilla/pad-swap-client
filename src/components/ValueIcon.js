@@ -56,7 +56,7 @@ export default function MediaCard(props) {
         </Grid>
         <Grid item>
           <p style={{fontFamily:'Arial', fontSize:12}}>
-            <b>{props.val} ETH</b>
+            <b>{props.ethVal} ETH</b>
             </p>
           </Grid>
         </Grid>
