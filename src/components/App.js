@@ -62,7 +62,7 @@ class App extends Component {
       const deployedNetworkTestNFT = TestNFTContract.networks[networkId];
       const instanceTestNFT = new web3.eth.Contract(
         TestNFTContract.abi,
-        "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600"
+        "0x743da870B93A473662ae8654c272614283949642"
       );
 
       console.log("Getting swap Contract");
@@ -70,7 +70,7 @@ class App extends Component {
       const deployedNetworkSwap = Swap.networks[networkId];
       const instanceSwap = new web3.eth.Contract(
         Swap.abi,
-        "0x6fb4e27B03D0c6359B78aAC96950d05dBf598522",
+        "0x624a36783981B0914Cf7393Dc2f5781467cc3013",
       );
       
       console.log("Setting state");
@@ -122,11 +122,11 @@ class App extends Component {
     console.log("Break 1");
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
-      offerContractArr[i] = "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600";//this.state.contractNFT.address;
+      offerContractArr[i] = "0x743da870B93A473662ae8654c272614283949642";//this.state.contractNFT.address;
     }
 
     for(var i = 0; i < this.state.askedNFTIds.length; i++) {
-      askContractArr[i] = "0x1b2e7503A9E5Fa32A5CFCab6494011c5ED994600";//this.state.contractNFT.address;
+      askContractArr[i] = "0x743da870B93A473662ae8654c272614283949642";//this.state.contractNFT.address;
     }
     console.log("Break 2");
     const _offerValue = ((parseInt(this.state.ethOffer)*(10**18)) || 0).toString();
@@ -224,6 +224,9 @@ class App extends Component {
       
       var offer = await this.getOfferData(offerId)
       var offerImages = []
+
+      var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
+      var askVal = await contractSwap.methods.getOfferAskVal(offerId).call()
       
       for(var j = 0; j < offer[0].length; j++) {
         var res = await fetch('https://axieinfinity.com/api/v2/axies/'+String(offer[0][j]));
@@ -240,7 +243,7 @@ class App extends Component {
       
       if(offerState) {
         
-        NFTdata_2.push([offer[0], offer[1], offerImages, askImages, offerId]);
+        NFTdata_2.push([offer[0], offer[1], offerImages, askImages, offerId, offVal, askVal]);
       }
       
     }
@@ -260,6 +263,9 @@ class App extends Component {
       var offerState = await contractSwap.methods.getOfferState(offerId).call()
       var offer = await this.getOfferData(offerId)
       var offerImages = []
+
+      var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
+      var askVal = await contractSwap.methods.getOfferAskVal(offerId).call()
       
       for(var j = 0; j < offer[0].length; j++) {
         var res = await fetch('https://axieinfinity.com/api/v2/axies/'+String(offer[0][j]));
@@ -275,7 +281,7 @@ class App extends Component {
       }
 
       if(offerState) {
-        NFTdata.push([offer[0], offer[1], offerImages, askImages, offerId]);
+        NFTdata.push([offer[0], offer[1], offerImages, askImages, offerId, offVal, askVal]);
       }
       
     }

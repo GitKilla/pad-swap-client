@@ -19,9 +19,20 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function printCards(numCards, userNFTs, images) {
+function printCards(numCards, userNFTs, images, val) {
     var cards = [];
     for(var i = 0; i < numCards; i++) {
+      if(i == 0) {
+        cards.push(
+          <Grid key={i} item xs={3}>
+            <ValueIcon 
+                ethVal={val}
+                rootBackground={"#F9F9F9"}
+                mediaBackground={"#F1F1F1"}
+                />
+          </Grid>
+        )
+      }
         cards.push( <Grid key={i} item xs={3}>
             <OfferIcon 
                 key={i} 
@@ -61,7 +72,7 @@ export default function NFTCardGrid(props) {
         >
         {/* <Card> */}
         
-            {printCards(props.numCards, props.userNFTs, props.images)}
+            {printCards(props.numCards, props.userNFTs, props.images, props.val)}
         {/* </Card> */}
             
   
