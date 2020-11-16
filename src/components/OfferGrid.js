@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import NFTCard from './NFTCard';
 import OfferIcon from './OfferIcon';
 import { CardHeader } from '@material-ui/core';
+import ValueIcon from './ValueIcon';
 // import LinearGradient from 'react-native-linear-gradient';
 
 const useStyles = makeStyles((theme) => ({
