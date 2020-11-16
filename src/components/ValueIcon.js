@@ -32,7 +32,7 @@ export default function MediaCard(props) {
 
   const classes = useStyles();
 
-  ethAmount = Math.round((props.ethVal/1000000000000000000)*1000)/1000;
+  var ethAmount = Math.round((props.ethVal/1000000000000000000)*1000)/1000;
 
   return (
     <Card className={classes.root} styles={{boxShadow:3}}>
