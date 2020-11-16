@@ -45,7 +45,7 @@ export default function MediaCard(props) {
         justify="center"
         style={{ minHeight: '10vh', maxWidth:"100%" }}
         >
-        <Grid item>
+        {/* <Grid item>
         <CardMedia
           className={classes.media}
           
@@ -54,7 +54,7 @@ export default function MediaCard(props) {
           title="Value"
         >
         </CardMedia>
-        </Grid>
+        </Grid> */}
         <Grid item>
           <p style={{fontFamily:'Arial', fontSize:12}}>
             <b>{ethAmount} ETH</b>
