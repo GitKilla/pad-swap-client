@@ -141,20 +141,24 @@ class App extends Component {
     const _askValue = ((parseFloat(this.state.ethAsk)*(10**18)) || 0).toString();
     console.log("Eth offer - propose trade: "+_offerValue);
     console.log("Eth ask - propose trade: "+_askValue);
-    const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
-                                                                            , offerContractArr
-                                                                            ,this.state.askedNFTIds
-                                                                            ,askContractArr
-                                                                            ,_offerValue
-                                                                            ,_askValue
-                                                                            ,this.state.traderAddress).send({from:this.state.userAddress, value:_offerValue})
+    if(this.state.swapApproval) {
+      const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
+                                                                              , offerContractArr
+                                                                              ,this.state.askedNFTIds
+                                                                              ,askContractArr
+                                                                              ,_offerValue
+                                                                              ,_askValue
+                                                                              ,this.state.traderAddress).send({from:this.state.userAddress, value:_offerValue})
 
-    for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
-      this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
-    }
+      for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
+        this.removeNFTfromOffered("offer", this.state.offeredNFTIds[i])
+      }
 
-    for(var i = 0; i < this.state.askedNFTIds.length; i++) {
-      this.removeNFTfromOffered("ask", this.state.askedNFTIds[i])
+      for(var i = 0; i < this.state.askedNFTIds.length; i++) {
+        this.removeNFTfromOffered("ask", this.state.askedNFTIds[i])
+      }
+    } else {
+      const transactionReceipt = await this.state.contractNFT.methods.setApprovalForAll(this.state.userAddress, "true").send({from:this.state.userAddress});
     }
     console.log("Break 3");
   }
@@ -369,7 +373,7 @@ class App extends Component {
           {/* {(this.state.activePage == "barter") ? */}
           <div>&nbsp;</div>
           <form onSubmit={this.proposeTrade}>
-          <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18}>Propose Trade</Typography></Button>
+          <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18}>{this.state.swapApproval?"Propose Trade":"Approve Trading"}</Typography></Button>
           </form>
           <div>&nbsp;</div>
           <div>&nbsp;</div>
