@@ -42,7 +42,8 @@ class App extends Component {
             askArray: [],
             ethOffer: null,
             ethAsk: null,
-            swapApproval: null
+            swapApproval: null,
+            swapAddress: null
           };
 
   componentDidMount = async () => {
@@ -101,7 +102,8 @@ class App extends Component {
         contractSwap: instanceSwap, 
         userAddress: accounts[0],
         numUserNFTs: userNFTs.length,
-        userNFTs: userNFTs
+        userNFTs: userNFTs,
+        swapAddress: swapAddress
       });
 
       var offerData = await this.getOffers()
@@ -158,7 +160,7 @@ class App extends Component {
         this.removeNFTfromOffered("ask", this.state.askedNFTIds[i])
       }
     } else {
-      const transactionReceipt = await this.state.contractNFT.methods.setApprovalForAll(this.state.contractSwap, "true").send({from:this.state.userAddress});
+      const transactionReceipt = await this.state.contractNFT.methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
     }
     console.log("Break 3");
   }
