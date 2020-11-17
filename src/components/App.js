@@ -52,8 +52,8 @@ class App extends Component {
       console.log("Begun")
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-      const swapAddress = "0xa69286149daBb0EA5cCb730DafC37A6f8E0409E9";
-      const NFTAddress = "0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b";
+      const swapAddress = "0xb7a516820064118c02CFAE0E5cDBeC8169eEC8F7"; //<--ropsten //"0xa69286149daBb0EA5cCb730DafC37A6f8E0409E9";
+      const NFTAddress = "0x192705345aCEe6481354A09caBc695C6107a147b"; //"0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b";
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
@@ -134,11 +134,11 @@ class App extends Component {
     console.log("Break 1");
     for(var i = 0; i < this.state.offeredNFTIds.length; i++) {
 
-      offerContractArr[i] = "0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b";//this.state.contractNFT.address;
+      offerContractArr[i] = this.state.NFTAddress;//this.state.contractNFT.address;
     }
 
     for(var i = 0; i < this.state.askedNFTIds.length; i++) {
-      askContractArr[i] = "0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b";//this.state.contractNFT.address;
+      askContractArr[i] = this.state.NFTAddress;//this.state.contractNFT.address;
     }
     console.log("Break 2");
     const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
