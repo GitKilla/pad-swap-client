@@ -379,7 +379,7 @@ class App extends Component {
       return (
 
         <div className="App">
-          <Bar mineMine={this.mineMint} setActivePage={this.setActivePage}></Bar>
+          <Bar mineMint={this.mineMint} setActivePage={this.setActivePage}></Bar>
           <div>
           {/* {(this.state.activePage == "barter") ? */}
           <div>&nbsp;</div>
