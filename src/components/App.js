@@ -129,8 +129,8 @@ class App extends Component {
       askContractArr[i] = "0x3b2178b75ef329d71FAeFF339530A8eB1C4F34eD";//this.state.contractNFT.address;
     }
     console.log("Break 2");
-    const _offerValue = ((parseInt(this.state.ethOffer)*(10**18)) || 0).toString();
-    const _askValue = ((parseInt(this.state.ethAsk)*(10**18)) || 0).toString();
+    const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
+    const _askValue = ((parseFloat(this.state.ethAsk)*(10**18)) || 0).toString();
     console.log("Eth offer - propose trade: "+_offerValue);
     console.log("Eth ask - propose trade: "+_askValue);
     const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
