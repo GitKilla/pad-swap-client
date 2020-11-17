@@ -43,7 +43,8 @@ class App extends Component {
             ethOffer: null,
             ethAsk: null,
             swapApproval: null,
-            swapAddress: null
+            swapAddress: null,
+            NFTAddress: null
           };
 
   componentDidMount = async () => {
@@ -103,7 +104,8 @@ class App extends Component {
         userAddress: accounts[0],
         numUserNFTs: userNFTs.length,
         userNFTs: userNFTs,
-        swapAddress: swapAddress
+        swapAddress: swapAddress,
+        NFTAddress: NFTAddress
       });
 
       var offerData = await this.getOffers()
@@ -359,6 +361,13 @@ class App extends Component {
     console.log("Event value: "+event.target.value);
   };
 
+  mineMint = async () => {
+    const {contractNFT, contractSwap } = this.state;
+
+    // mint random id nft
+    const receipt = await contractNFT.methods.mine(this.state.userAddress, Math.floor(Math.random()*1000)).send({from:this.state.userAddress})
+  };
+
   render() {
     
     if (!this.state.web3) {
@@ -370,7 +379,7 @@ class App extends Component {
       return (
 
         <div className="App">
-          <Bar setActivePage={this.setActivePage}></Bar>
+          <Bar mineMine={this.mineMint} setActivePage={this.setActivePage}></Bar>
           <div>
           {/* {(this.state.activePage == "barter") ? */}
           <div>&nbsp;</div>
