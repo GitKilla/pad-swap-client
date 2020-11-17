@@ -158,7 +158,7 @@ class App extends Component {
         this.removeNFTfromOffered("ask", this.state.askedNFTIds[i])
       }
     } else {
-      const transactionReceipt = await this.state.contractNFT.methods.setApprovalForAll(this.state.userAddress, "true").send({from:this.state.userAddress});
+      const transactionReceipt = await this.state.contractNFT.methods.setApprovalForAll(this.state.contractSwap, "true").send({from:this.state.userAddress});
     }
     console.log("Break 3");
   }
