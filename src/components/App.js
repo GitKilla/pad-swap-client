@@ -78,7 +78,7 @@ class App extends Component {
 
       // const swapApproved = swap.
       // const {contractNFT, contractSwap } = this.state;
-      const isApproved = await instanceTestNFT.methods.isApprovedForAll(this.state.userAddress, swapAddress).call();
+      const isApproved = await instanceTestNFT.methods.isApprovedForAll(accounts[0], swapAddress).call();
       console.log("Is Approved: "+isApproved);
       console.log("Setting state");
       this.setState({ web3, 
