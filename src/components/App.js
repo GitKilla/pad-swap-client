@@ -41,7 +41,8 @@ class App extends Component {
             offerArray: [],
             askArray: [],
             ethOffer: null,
-            ethAsk: null
+            ethAsk: null,
+            swapApproval: null
           };
 
   componentDidMount = async () => {
@@ -49,6 +50,8 @@ class App extends Component {
       console.log("Begun")
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
+      const swapAddress = "0xa69286149daBb0EA5cCb730DafC37A6f8E0409E9";
+      const NFTAddress = "0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b";
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
@@ -62,7 +65,7 @@ class App extends Component {
       const deployedNetworkTestNFT = TestNFTContract.networks[networkId];
       const instanceTestNFT = new web3.eth.Contract(
         TestNFTContract.abi,
-        "0x3ea0761e7aB546E72bb0aCe628BDdCF4aCDD646b"
+        NFTAddress
       );
 
       console.log("Getting swap Contract");
@@ -70,15 +73,20 @@ class App extends Component {
       const deployedNetworkSwap = Swap.networks[networkId];
       const instanceSwap = new web3.eth.Contract(
         Swap.abi,
-        "0xa69286149daBb0EA5cCb730DafC37A6f8E0409E9",
+        swapAddress
       );
-      
+
+      // const swapApproved = swap.
+      // const {contractNFT, contractSwap } = this.state;
+      const isApproved = await instanceTestNFT.methods.isApprovedForAll(this.state.userAddress, swapAddress).call();
+      console.log("Is Approved: "+isApproved);
       console.log("Setting state");
       this.setState({ web3, 
         accounts, 
         contractNFT: instanceTestNFT, 
         contractSwap: instanceSwap, 
-        userAddress: accounts[0]
+        userAddress: accounts[0],
+        swapApproval: isApproved
       });
 
 
@@ -361,7 +369,7 @@ class App extends Component {
           {/* {(this.state.activePage == "barter") ? */}
           <div>&nbsp;</div>
           <form onSubmit={this.proposeTrade}>
-          <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18} >Propose Trade</Typography></Button>
+          <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18}>Propose Trade</Typography></Button>
           </form>
           <div>&nbsp;</div>
           <div>&nbsp;</div>
