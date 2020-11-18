@@ -122,6 +122,14 @@ class App extends Component {
         askArray: askData
       })
 
+      var subscription = web3.eth.subscribe('logs', {
+        address: this.state.swapAddress,
+        topics: [null]
+      }, function(error, result){
+        if (!error)
+            console.log(result);
+      });
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
