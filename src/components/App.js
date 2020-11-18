@@ -453,7 +453,7 @@ class App extends Component {
             numCards={this.state.numUserNFTs} 
             userNFTs={this.state.userNFTs} 
             maxWidth="40%" minWidth="40%"
-            minHeight="60vh"></NFTCardGrid>
+            minHeight="60vh" maxHeight="60vh"></NFTCardGrid>
 {/* 
           <Grid container
             spacing={1}
@@ -491,7 +491,7 @@ class App extends Component {
               nftType={"ask"}
               numCards={this.state.numTraderNFTs} 
               userNFTs={this.state.traderNFTs} 
-              maxWidth="40%" minWidth="40%" minHeight="60vh"></NFTCardGrid>
+              maxWidth="40%" minWidth="40%" minHeight="60vh" maxHeight="60vh"></NFTCardGrid>
           }
         
           </Grid>
