@@ -245,8 +245,9 @@ class App extends Component {
       var isApproved = await this.state.trackedNFTInstances[contractIndex].methods.isApprovedForAll(this.state.userAddress, this.state.swapAddress).call();
       // var isInAsk = 
       console.log("IS APPROVED: "+isApproved)
+      // var temp = await
       if(!isApproved) 
-        var temp = await this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
+         this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
     }
 
 
