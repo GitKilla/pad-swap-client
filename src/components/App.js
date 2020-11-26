@@ -235,6 +235,7 @@ class App extends Component {
     const _msgValue = parseFloat(_offerValue)+parseFloat(fee);
     console.log("Msg Value: "+_msgValue);
     console.log("Offer Value: "+_offerValue);
+    console.log("Test change")
 
     var dedup = Array.from(new Set(offerContractArr));
     console.log("Contracts Post-dedup: "+dedup)
