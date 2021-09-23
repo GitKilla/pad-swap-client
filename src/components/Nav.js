@@ -5,7 +5,7 @@ function Nav() {
     return (
         <nav>
             <ul>
-                <li>Barter</li>
+                <li>PadSwap</li>
                 <li>Shop</li>
             </ul>
         </nav>

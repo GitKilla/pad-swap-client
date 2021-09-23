@@ -261,7 +261,7 @@ class Barter extends Component {
 
         <div>&nbsp;</div>
         <form onSubmit={this.proposeTrade}>
-        <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18} >Propose Trade</Typography></Button>
+        <Button type='submit' color='primary' variant='outlined'><Typography fontSize={18} >Propose PadSwap Stake</Typography></Button>
         </form>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
@@ -281,16 +281,7 @@ class Barter extends Component {
           // xs={3}
           style={{ minHeight: '10vh', padding:'1'}}
         >
-        
-        <NFTCardGrid 
-          offeredNFTIds={this.state.offeredNFTIds} 
-          pullNFTOffer={this.removeNFTfromOffered} 
-          pushNFTOffer={this.addNFTToOffered}
-          nftType={"offer"}
-          numCards={this.state.numUserNFTs} 
-          userNFTs={this.state.userNFTs} 
-          maxWidth="40%"></NFTCardGrid>
-        
+
         
         {(!this.state.addressEntered) ? 
           <Grid
@@ -302,7 +293,7 @@ class Barter extends Component {
           >
             <form onSubmit={this.handleSubmit}>
             <FormGroup>
-            <TextField onChange={this.handleAddressChange} value={this.state.traderAddress} id="outlined-basic" label="Address" variant="outlined"  />
+            <TextField onChange={this.handleAddressChange} value={this.state.traderAddress} id="outlined-basic" label="Other Person's Address" variant="outlined"  />
             <Button type="submit">
               Enter 
             </Button>
@@ -310,14 +301,16 @@ class Barter extends Component {
               </form>
               </Grid>
           : 
-          <NFTCardGrid 
-            offeredNFTIds={this.state.askedNFTIds} 
-            pullNFTOffer={this.removeNFTfromOffered} 
-            pushNFTOffer={this.addNFTToOffered}
-            nftType={"ask"}
-            numCards={this.state.numTraderNFTs} 
-            userNFTs={this.state.traderNFTs} 
-            maxWidth="40%" ></NFTCardGrid>
+          <Card style={{ maxHeight: '13vh'
+          , maxWidth: '90%'
+          , minWidth: '90%'
+          , paddingLeft: 5
+          , paddingTop: 8
+          , paddingBottom: 5
+          , background:'linear-gradient(315deg, #f28de6, #ec8e79, #f28de6, #ec8e79)'//'#F1F1F1' //'#F2A7C0' 
+          , alignItems:'flex'
+          , justify:'space-evenly'
+          }}>Offer Sent</Card>
         }
         
         {/* <NFTCardGrid numCards={this.state.numTraderNFTs} userNFTs={this.state.traderNFTs} maxWidth="40%" maxHeight="10vh"></NFTCardGrid> */}

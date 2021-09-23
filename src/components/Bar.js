@@ -31,11 +31,11 @@ export default function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" onClick={() => {props.mineMint()}} className={classes.menuButton} color="inherit" aria-label="menu">
-            <img src="https://i.ibb.co/Xtsrjvs/1f6cd.png" alt="Barter Finance" height="40" width="40" />
+            <img src="https://i.ibb.co/Xtsrjvs/1f6cd.png" alt="PadSwap" height="40" width="40" />
             {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button style={{fontSize:'36px', paddingTop:'0px', paddingBottom:'0px'}} onClick={() => {props.setActivePage("barter")}} color="secondary">Barter</Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button style={{fontSize:'36px', paddingTop:'0px', paddingBottom:'0px'}} onClick={() => {props.setActivePage("barter")}} color="secondary">PadSwap</Button>
           </Typography>
           
           <Button onClick={() => {props.setActivePage("offers")}} color="secondary">Offers</Button>
