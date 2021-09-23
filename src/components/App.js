@@ -61,16 +61,16 @@ class App extends Component {
       console.log("Yikes")
 
       // ropsten addresses
-      const swapAddress = "0x7652a6791c304794de601f366B5B768CDb4CfBeA";
-      const NFTAddress = "0x13b939f04e9Ea0E8C28f4E8006A081E28b9a440e";
-      const NFTAddress2 = "0x4633555F8FbFA47360AC8bA3B02967cf6dF4718f";
-      const NFTAddress3 = "0x4DE4640051ECD928983Ce96dB7285Bc5AB0027a4";
+      // const swapAddress = "0x7652a6791c304794de601f366B5B768CDb4CfBeA";
+      // const NFTAddress = "0x13b939f04e9Ea0E8C28f4E8006A081E28b9a440e";
+      // const NFTAddress2 = "0x4633555F8FbFA47360AC8bA3B02967cf6dF4718f";
+      // const NFTAddress3 = "0x4DE4640051ECD928983Ce96dB7285Bc5AB0027a4";
 
       //local ganache addresses
-      // var swapAddress = "0xb6fc10BB88Cf9350bbBa356b3fb516BF3727632A";
-      // var NFTAddress = "0x2AEceCa1D43160062BA892F8730eBE05e8dE5409";
-      // var NFTAddress2 = "0x35046Cda39379162Bc6965b22b9bDA88B6C288f9";
-      // var NFTAddress3 = "0x34F667cbF63cb904D339fc53570A4bAcC98e8cDe";
+      var swapAddress = "0xb6fc10BB88Cf9350bbBa356b3fb516BF3727632A";
+      var NFTAddress = "0x2AEceCa1D43160062BA892F8730eBE05e8dE5409";
+      var NFTAddress2 = "0x35046Cda39379162Bc6965b22b9bDA88B6C288f9";
+      var NFTAddress3 = "0x34F667cbF63cb904D339fc53570A4bAcC98e8cDe";
 
       this.setState({
         trackedNFTAddresses: [NFTAddress, NFTAddress2, NFTAddress3]
