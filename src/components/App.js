@@ -725,7 +725,7 @@ class App extends Component {
                 // background:'linear-gradient(315deg, #f28de6, #cf17b9, #f28de6, #cf17b9)'
                 background:'linear-gradient(315deg,  #D00D0D, #f34444, #D00D0D)'
                 
-                }}><Typography fontSize={18}>Propose Trade</Typography></Button>
+                }}><Typography fontSize={18}>Propose Swap</Typography></Button>
           </form>
 
 
@@ -738,7 +738,7 @@ class App extends Component {
             style={{minWidth:'100%', minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
           
-          <Grid item style={{ minHeight: '5vh', paddingRight:'10', maxHeight:'5vh'}}>
+
           <form onChange={this.handleEthOfferChange}>
               <FormGroup>
                 <TextField 
@@ -751,11 +751,7 @@ class App extends Component {
               </FormGroup>
             </form>
             </Grid>
-            <Grid item style={{ minHeight: '5vh', padding:'1', maxHeight:'5vh'}}></Grid>
-          <Grid item style={{ minHeight: '5vh', padding:'1', maxHeight:'5vh'}}>
-          
-            </Grid>
-            </Grid>
+
             <div>&nbsp;</div>
         
 
