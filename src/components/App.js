@@ -49,6 +49,7 @@ class App extends Component {
             NFTAddress: null,
             trackedNFTAddresses: [],
             trackedNFTInstances: [],
+            tokenInstance: null,
             invalidAddress: false,
             inbox: true
           };
@@ -68,27 +69,15 @@ class App extends Component {
 
       //local ganache addresses
       var swapAddress = "0xb6fc10BB88Cf9350bbBa356b3fb516BF3727632A";
-      var NFTAddress = "0x2AEceCa1D43160062BA892F8730eBE05e8dE5409";
-      var NFTAddress2 = "0x35046Cda39379162Bc6965b22b9bDA88B6C288f9";
-      var NFTAddress3 = "0x34F667cbF63cb904D339fc53570A4bAcC98e8cDe";
+      var tokenAddress = "0x2AEceCa1D43160062BA892F8730eBE05e8dE5409";
 
-      this.setState({
-        trackedNFTAddresses: [NFTAddress, NFTAddress2, NFTAddress3]
-      });
-
-      console.log(this.state.trackedNFTAddresses)
-
-      // NFTAddress = "0xF600A7734a9080fFa9156DE19edDc8f44CdDB895"; // axie deployed contract
-      var temp_array = [];
-      for(var i = 0; i < this.state.trackedNFTAddresses.length; i++) {
-        temp_array.push(new web3.eth.Contract(
-          TestNFTContract.abi,
-          this.state.trackedNFTAddresses[i]
-        ))
-      }
+      
       // console.log(temp_array)
       this.setState({
-        trackedNFTInstances: temp_array
+        tokenInstance: new web3.eth.Contract(
+          TestERC20.abi,
+          tokenAddress
+        )
       })
 
 
@@ -97,21 +86,11 @@ class App extends Component {
       const primaryAddress = accounts[0];
       web3.eth.defaultAccount = web3.eth.accounts[0];
 
-
-      // Get the Test NFT contract instance.
-      console.log("Getting NFT Contract");
-      // const networkId = await web3.eth.net.getId();
-      // const deployedNetworkTestNFT = TestNFTContract.networks[networkId];
-      const instanceTestNFT = new web3.eth.Contract(
-        TestNFTContract.abi,
-        NFTAddress
-      );
-
       console.log("Getting swap Contract");
       // Get the Swap contract instance.
       // const deployedNetworkSwap = Swap.networks[networkId];
       const instanceSwap = new web3.eth.Contract(
-        Swap.abi,
+        Padswap.abi,
         swapAddress
       );
 
@@ -214,42 +193,31 @@ class App extends Component {
   proposeTrade = async (event) => { // add approval check beforehand
     // console.log("Break 0");
     event.preventDefault();
-    var offerContractArr = [];
-    var askContractArr = [];
     // const web3 = await getWeb3();
     // console.log("Break 1");
     // contractSwap.methods.getOfferOffVal(offerId).call()
-    var fee = await this.state.contractSwap.methods.getFee().call();
-    console.log("Fee: "+parseFloat(fee));
-    for(var i = 0; i < this.state.offeredNFTContracts.length; i++) {
-      offerContractArr[i] = this.state.offeredNFTContracts[i];
-    }
 
-    for(var i = 0; i < this.state.askedNFTContracts.length; i++) {
-      askContractArr[i] = this.state.askedNFTContracts[i];
-    }
-    console.log("Ask Contract Array: "+askContractArr);
-    console.log("Offer Contract Array: "+offerContractArr);
+
     const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
-    const _askValue = ((parseFloat(this.state.ethAsk)*(10**18)) || 0).toString();
-    const _msgValue = parseFloat(_offerValue)+parseFloat(fee);
+    const _msgValue = parseFloat(_offerValue);
     console.log("Msg Value: "+_msgValue);
     console.log("Offer Value: "+_offerValue);
     console.log("Test change")
 
-    var dedup = Array.from(new Set(offerContractArr));
-    console.log("Contracts Post-dedup: "+dedup)
-    for(var i = 0; i < dedup.length; i++) {
-      console.log("Dedup[i]: "+dedup[i])
-      var contractIndex = this.state.trackedNFTAddresses.indexOf(dedup[i])
-      console.log("Contract Index: "+contractIndex)
-      var isApproved = await this.state.trackedNFTInstances[contractIndex].methods.isApprovedForAll(this.state.userAddress, this.state.swapAddress).call();
-      // var isInAsk = 
-      console.log("IS APPROVED: "+isApproved)
-      // var temp = await
-      if(!isApproved) 
-         this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
-    }
+    var contractIndex = this.state.trackedNFTAddresses.indexOf(dedup[i])
+    console.log("Contract Index: "+contractIndex)
+    var spendAllowance = await this.state.tokenInstance.methods.allowance(this.state.userAddress, this.state.swapAddress).call();
+    var tokenBalance = await this.state.tokenInstance.methods.balanceOf(this.state.userAddress).call();
+    var isApproved = false;
+    if(spendAllowance >= _offerValue)
+      isApproved = true;
+
+    // var isInAsk = 
+    console.log("IS APPROVED: "+isApproved)
+    // var temp = await
+    if(!isApproved) 
+        this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
+    
 
 
     // console.log("Eth offer - propose trade: "+_offerValue);
@@ -728,6 +696,9 @@ class App extends Component {
                 }}><Typography fontSize={18}>Propose Swap</Typography></Button>
           </form>
 
+          &nbsp;
+          &nbsp;
+          &nbsp;
 
           <Grid container
             spacing={1}
