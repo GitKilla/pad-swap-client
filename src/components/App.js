@@ -753,19 +753,7 @@ class App extends Component {
             </Grid>
             <Grid item style={{ minHeight: '5vh', padding:'1', maxHeight:'5vh'}}></Grid>
           <Grid item style={{ minHeight: '5vh', padding:'1', maxHeight:'5vh'}}>
-          {(!this.state.addressEntered) ? <div></div> :
-          <form onChange={this.handleEthAskChange}>
-              <FormGroup>
-                <TextField 
-                  style={{maxWidth:'200px', minWidth:'200px'}}
-                  value={this.state.ethAsk}
-                  id="ethask" 
-                  label="$ETH Ask"
-                  type="number" 
-                  variant="outlined"  />
-              </FormGroup>
-            </form>
-            }
+          
             </Grid>
             </Grid>
             <div>&nbsp;</div>
@@ -779,16 +767,7 @@ class App extends Component {
             // xs={3}
             style={{ minHeight: '10vh', padding:'1', maxHeight:'10vh'}}
           >
-          
-          <NFTCardGrid 
-            offeredNFTIds={this.state.offeredNFTIds}
-            pullNFTOffer={this.removeNFTfromOffered}
-            pushNFTOffer={this.addNFTToOffered}
-            nftType={"offer"}
-            numCards={this.state.numUserNFTs} 
-            userNFTs={this.state.userNFTs} 
-            maxWidth="40%" minWidth="40%"
-            minHeight="60vh" maxHeight="60vh"></NFTCardGrid>
+
 {/* 
           <Grid container
             spacing={1}
@@ -852,14 +831,16 @@ class App extends Component {
                 </form>
                 </Grid>
             :      
-            <NFTCardGrid 
-              offeredNFTIds={this.state.askedNFTIds} 
-              pullNFTOffer={this.removeNFTfromOffered} 
-              pushNFTOffer={this.addNFTToOffered}
-              nftType={"ask"}
-              numCards={this.state.numTraderNFTs} 
-              userNFTs={this.state.traderNFTs} 
-              maxWidth="40%" minWidth="40%" minHeight="60vh" maxHeight="60vh"></NFTCardGrid>
+            <Card style={{ maxHeight: '13vh'
+            , maxWidth: '90%'
+            , minWidth: '90%'
+            , paddingLeft: 5
+            , paddingTop: 8
+            , paddingBottom: 5
+            , background:'linear-gradient(315deg, #f28de6, #ec8e79, #f28de6, #ec8e79)'//'#F1F1F1' //'#F2A7C0' 
+            , alignItems:'flex'
+            , justify:'space-evenly'
+            }}>Offer Sent</Card>
           }
         
           </Grid>
