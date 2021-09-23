@@ -8,6 +8,7 @@ if (process.env.PORT) {
    dirToUse = 'public'
 }
 console.log(dirToUse);
+console.log("ayy")
 const publicPath = path.join(__dirname, '..', dirToUse);
 const port = process.env.PORT || 5000;
 
