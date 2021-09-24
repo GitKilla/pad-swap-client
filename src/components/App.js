@@ -96,18 +96,17 @@ class App extends Component {
 
       // const swapApproved = swap.
       // const {contractNFT, contractSwap } = this.state;
-      // const isApproved = await instanceTestNFT.methods.isApprovedForAll(accounts[0], swapAddress).call();
+
       // console.log("Is Approved: "+isApproved);
       console.log("Setting state");
       // console.log(web3);
       // console.log(accounts);
-      // console.log(instanceTestNFT);
+
       // console.log(instanceSwap);
       // console.log(accounts[0]);
       // console.log(isApproved);
       this.setState({ web3, 
-        accounts, 
-        contractNFT: instanceTestNFT, 
+        accounts,
         contractSwap: instanceSwap, 
         userAddress: accounts[0]
       });
@@ -122,13 +121,10 @@ class App extends Component {
       console.log("Setting more state");
       this.setState({ web3, 
         accounts, 
-        contractNFT: instanceTestNFT, 
         contractSwap: instanceSwap, 
         userAddress: accounts[0],
-        numUserNFTs: userNFTs.length,
-        userNFTs: userNFTs,
         swapAddress: swapAddress,
-        NFTAddress: NFTAddress
+        tokenAddress: swapAddress
       });
 
       console.log("Loading offers")
@@ -204,7 +200,6 @@ class App extends Component {
     console.log("Offer Value: "+_offerValue);
     console.log("Test change")
 
-    var contractIndex = this.state.trackedNFTAddresses.indexOf(dedup[i])
     console.log("Contract Index: "+contractIndex)
     var spendAllowance = await this.state.tokenInstance.methods.allowance(this.state.userAddress, this.state.swapAddress).call();
     var tokenBalance = await this.state.tokenInstance.methods.balanceOf(this.state.userAddress).call();
@@ -215,59 +210,31 @@ class App extends Component {
     // var isInAsk = 
     console.log("IS APPROVED: "+isApproved)
     // var temp = await
-    if(!isApproved) 
-        this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
-    
+    if(!isApproved)
+        var temp = await this.state.tokenInstance.methods.approve(this.state.swapAddress, _offerValue).send({from:this.state.userAddress});
 
+    console.log("Eth offer - propose trade: "+_offerValue);
 
-    // console.log("Eth offer - propose trade: "+_offerValue);
-    // console.log("Eth ask - propose trade: "+_askValue);
-
-    // console.log("Offered IDs: "+this.state.offeredNFTIds)
-    // console.log("Offered Contracts: "+this.state.offeredNFTContracts)
-    // console.log("Asked IDs: "+this.state.askedNFTIds)
-    // console.log("Asked Contracts: "+this.state.askedNFTContracts)
-    // console.log("Offer Val: "+String(_offerValue))
-    // console.log("Ask Val: "+String(_askValue))
-    // console.log("Offerer Address: "+this.state.userAddress)
-    // console.log("Ask Address: "+this.state.traderAddress)
-    const transactionReceipt = await this.state.contractSwap.methods.addOffer(this.state.offeredNFTIds
-                                                                              ,this.state.offeredNFTContracts
-                                                                              ,this.state.askedNFTIds
-                                                                              ,this.state.askedNFTContracts
-                                                                              ,_offerValue
-                                                                              ,_askValue
-                                                                              ,this.state.traderAddress).send({from:this.state.userAddress, value:_msgValue})
-
-    this.setState({offeredNFTIds: [],
-      askedNFTIds: [],
-      offeredNFTContracts: [],
-      askedNFTContracts: []
-    })
+    const transactionReceipt = await this.state.contractSwap.methods.addOffer(_offerValue,this.state.traderAddress).send({from:this.state.userAddress})
 
   }
 
   acceptTrade = async (offerId, _askContracts) => { // add approval check beforehand
-    const {contractNFT, contractSwap } = this.state;
-    console.log("Contracts Pre-dedupe: "+_askContracts)
-    var dedup = Array.from(new Set(_askContracts));
-    console.log("Contracts Post-dedup: "+dedup)
-    var fee = await this.state.contractSwap.methods.getFee().call();
-    var ask = await this.state.contractSwap.methods.getOfferAskVal(offerId).call();
-    console.log("Fee: "+fee)
-    console.log("Ask: "+ask)
-    var msgVal = parseFloat(fee)+parseFloat(ask);
-    for(var i = 0; i < dedup.length; i++) {
-      console.log("Dedup[i]: "+dedup[i])
-      var contractIndex = this.state.trackedNFTAddresses.indexOf(dedup[i])
-      console.log("Contract Index: "+contractIndex)
-      var isApproved = await this.state.trackedNFTInstances[contractIndex].methods.isApprovedForAll(this.state.userAddress, this.state.swapAddress).call();
-      // var isInAsk = 
-      console.log("IS APPROVED: "+isApproved)
-      if(!isApproved) 
-        var temp = await this.state.trackedNFTInstances[contractIndex].methods.setApprovalForAll(this.state.swapAddress, "true").send({from:this.state.userAddress});
-    }
-    const transactionReceipt = await this.state.contractSwap.methods.acceptOffer(offerId).send({from:this.state.userAddress, value:msgVal})
+    const {tokenInstance, contractSwap } = this.state;
+
+    var offVal = await this.state.contractSwap.methods.getOfferOffVal(offerId).call();
+
+    var spendAllowance = await this.state.tokenInstance.methods.allowance(this.state.userAddress, this.state.swapAddress).call();
+    var tokenBalance = await this.state.tokenInstance.methods.balanceOf(this.state.userAddress).call();
+    var isApproved = false;
+    if(spendAllowance >= offVal)
+      isApproved = true;
+
+    console.log("IS APPROVED: "+isApproved)
+    if(!isApproved) 
+      var temp = await this.state.tokenInstance.methods.approve(this.state.swapAddress, offVal).send({from:this.state.userAddress});
+    
+    const transactionReceipt = await this.state.contractSwap.methods.acceptOffer(offerId).send({from:this.state.userAddress})
   }
 
   cancelTrade = async (offerId) => { // add approval check beforehand
