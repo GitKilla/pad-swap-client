@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TestNFTContract from "../contracts/TestNFTContract.json";
-import Swap from "../contracts/Swap.json";
+import TestERC20 from "../contracts/TestERC20.json";
+import Padswap from "../contracts/Swap.json";
 import getWeb3 from "../getWeb3";
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
