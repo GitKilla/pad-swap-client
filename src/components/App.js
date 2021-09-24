@@ -68,8 +68,8 @@ class App extends Component {
       // const NFTAddress3 = "0x4DE4640051ECD928983Ce96dB7285Bc5AB0027a4";
 
       //local ganache addresses
-      var swapAddress = "0x4cf52dFea44d0db6F1f19B9469C46Ed7A55747Cd";
-      var tokenAddress = "0x3423e6ac488bb0c48DC9057f22f53dC3AB82d29E";
+      var swapAddress = "0x5c8B1c62012F3A0Fa71710de2240e6da79c22749";
+      var tokenAddress = "0x3d7cC2771B8cbaD400A4E68eD7Bff92cedD2485B";
 
       
       // console.log(temp_array)
