@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TestERC20 from "../contracts/TestERC20.json";
-import Padswap from "../contracts/Swap.json";
+import Padswap from "../contracts/Padswap.json";
 import getWeb3 from "../getWeb3";
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -443,15 +443,15 @@ class App extends Component {
                 </Grid>
             :      
             <Card style={{ maxHeight: '13vh'
-            , maxWidth: '90%'
-            , minWidth: '90%'
+            , maxWidth: '20%'
+            , minWidth: '20%'
             , paddingLeft: 5
             , paddingTop: 8
             , paddingBottom: 5
             , background:'linear-gradient(315deg, #f28de6, #ec8e79, #f28de6, #ec8e79)'//'#F1F1F1' //'#F2A7C0' 
             , alignItems:'flex'
             , justify:'space-evenly'
-            }}>Offer Sent</Card>
+            }}><Typography fontSize={12}>Address Registered</Typography></Card>
           }
         
           </Grid>
