@@ -39,7 +39,8 @@ export default function Offer(props) {
                   // xs={3}
                   style={{ minHeight: '10vh'}}
                 >
-        
+        <Typography>{props.otherAddress}</Typography>
+        <Typography>{props.offerVal}</Typography>
         </Grid>
         <Grid container
                   flexgrow={1}
