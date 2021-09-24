@@ -196,7 +196,6 @@ class App extends Component {
 
     const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
 
-    console.log("Msg Value: "+_msgValue);
     console.log("Offer Value: "+_offerValue);
     console.log("Test change")
 
