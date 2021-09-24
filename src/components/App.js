@@ -242,6 +242,11 @@ class App extends Component {
       
     }
 
+    if(offData == null )
+    {
+      console.log("OFFER DATA RETURNED IS NULL")
+    }
+
     return offData
 
   };
