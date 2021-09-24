@@ -231,7 +231,7 @@ class App extends Component {
     const {contractSwap} = this.state;
     var offData = [];
     const numOffers = await contractSwap.methods.offerCountByAddress(this.state.userAddress).call()
-
+    console.log("Num Offers: "+numOffers)
     for(var i = 0; i < numOffers; i++) {
       var offerId = await contractSwap.methods.offersByAddress(this.state.userAddress, i).call()
       var offerState = await contractSwap.methods.getOfferState(offerId).call()
