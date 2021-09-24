@@ -195,12 +195,11 @@ class App extends Component {
 
 
     const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
-    const _msgValue = parseFloat(_offerValue);
+
     console.log("Msg Value: "+_msgValue);
     console.log("Offer Value: "+_offerValue);
     console.log("Test change")
 
-    console.log("Contract Index: "+contractIndex)
     var spendAllowance = await this.state.tokenInstance.methods.allowance(this.state.userAddress, this.state.swapAddress).call();
     var tokenBalance = await this.state.tokenInstance.methods.balanceOf(this.state.userAddress).call();
     var isApproved = false;
