@@ -68,8 +68,8 @@ class App extends Component {
       // const NFTAddress3 = "0x4DE4640051ECD928983Ce96dB7285Bc5AB0027a4";
 
       //local ganache addresses
-      var swapAddress = "0xb6fc10BB88Cf9350bbBa356b3fb516BF3727632A";
-      var tokenAddress = "0x2AEceCa1D43160062BA892F8730eBE05e8dE5409";
+      var swapAddress = "0x4cf52dFea44d0db6F1f19B9469C46Ed7A55747Cd";
+      var tokenAddress = "0x3423e6ac488bb0c48DC9057f22f53dC3AB82d29E";
 
       
       // console.log(temp_array)
@@ -94,29 +94,12 @@ class App extends Component {
         swapAddress
       );
 
-      // const swapApproved = swap.
-      // const {contractNFT, contractSwap } = this.state;
-
-      // console.log("Is Approved: "+isApproved);
-      console.log("Setting state");
-      // console.log(web3);
-      // console.log(accounts);
-
-      // console.log(instanceSwap);
-      // console.log(accounts[0]);
-      // console.log(isApproved);
       this.setState({ web3, 
         accounts,
         contractSwap: instanceSwap, 
         userAddress: accounts[0]
       });
 
-
-      console.log("Getting user data");
-      //this is an array of arrarys of size two, with NFTId and imageurl
-      //"0x0000000000000000000000002f47d55c7f89a38aaf9470f9f83adb6e48918ac9"
-      //"0x0000000000000000000000002f47d55c7f89a38aaf9470f9f83adb6e48918ac9"
-      const userNFTs = await this.getData2(accounts[0]);
       
       console.log("Setting more state");
       this.setState({ web3, 
