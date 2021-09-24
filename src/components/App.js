@@ -179,7 +179,8 @@ class App extends Component {
     // contractSwap.methods.getOfferOffVal(offerId).call()
 
 
-    const _offerValue = ((parseFloat(this.state.ethOffer)*(10**18)) || 0).toString();
+    // removed this *(10**18) 
+    const _offerValue = ((parseFloat(this.state.ethOffer)) || 0).toString();
 
     console.log("Offer Value: "+_offerValue);
     console.log("Test change")
