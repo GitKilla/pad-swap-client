@@ -30,7 +30,7 @@ export default function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" onClick={() => {props.mineMint()}} className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <img src="https://i.ibb.co/Xtsrjvs/1f6cd.png" alt="PadSwap" height="40" width="40" />
             {/* <MenuIcon /> */}
           </IconButton>

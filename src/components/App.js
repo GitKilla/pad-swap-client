@@ -303,7 +303,7 @@ class App extends Component {
       return (
 
         <div className="App">
-          <Bar mineMint={this.mineMint} setActivePage={this.setActivePage}></Bar>
+          <Bar setActivePage={this.setActivePage}></Bar>
           <div>
           <div>&nbsp;</div>
           <Grid container justify='center'>
