@@ -205,9 +205,6 @@ class App extends Component {
     if(spendAllowance >= _offerValue)
       isApproved = true;
 
-    // var isInAsk = 
-    console.log("IS APPROVED: "+isApproved)
-    // var temp = await
     if(!isApproved)
         var temp = await this.state.tokenInstance.methods.approve(this.state.swapAddress, _offerValue).send({from:this.state.userAddress});
 
@@ -240,331 +237,59 @@ class App extends Component {
     const transactionReceipt = await this.state.contractSwap.methods.cancelOffer(offerId).send({from:this.state.userAddress})
   }
 
-  addNFTToOffered = (type, nftid, contract) => {
-    if(type == "offer") {
-      var arr = this.state.offeredNFTIds;
-      arr.push(nftid)
-      var arr2 = this.state.offeredNFTContracts;
-      arr2.push(contract.toString())
-      this.setState({
-          offeredNFTIds: arr
-          ,offeredNFTContracts: arr2
-      });
-    } else {
-      var arr = this.state.askedNFTIds;
-      arr.push(nftid)
-      var arr2 = this.state.askedNFTContracts;
-      arr2.push(contract.toString())
-      this.setState({
-        askedNFTIds: arr
-        ,askedNFTContracts: arr2
-      });
-    }
-    console.log("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=")
-    console.log("Asked NFTs: "+this.state.askedNFTIds);
-    console.log("Asked Contracts: "+this.state.askedNFTContracts);
-    console.log("Offered NFTs: "+this.state.offeredNFTIds);
-    console.log("Offered Contracts: "+this.state.offeredNFTContracts);
-  };
-
-  removeNFTfromOffered = (type, nftid, contract) => {
-    if(type == "offer") {
-      var arr = this.state.offeredNFTIds;
-      var arr2 = this.state.offeredNFTContracts;
-      var temp_arr = []
-      for (var i = 0; i < arr.length; i++){
-        temp_arr.push(arr[i]+','+arr2[i]);
-      }
-      var ind = temp_arr.indexOf(nftid+','+contract);
-      temp_arr.splice(ind, 1);
-      arr = []
-      arr2 = []
-      for (var i = 0; i < temp_arr.length; i++){
-        arr.push(temp_arr[i].split(",")[0]);
-        arr2.push(temp_arr[i].split(",")[1]);
-      }
-      this.setState({offeredNFTIds: arr, offeredNFTContracts: arr2});
-    } else {
-      var arr = this.state.askedNFTIds;
-      var arr2 = this.state.askedNFTContracts;
-      var temp_arr = []
-      for (var i = 0; i < arr.length; i++){
-        temp_arr.push(arr[i]+','+arr2[i]);
-      }
-      var ind = temp_arr.indexOf(nftid+','+contract);
-      temp_arr.splice(ind, 1);
-      arr = []
-      arr2 = []
-      for (var i = 0; i < temp_arr.length; i++){
-        arr.push(temp_arr[i].split(",")[0]);
-        arr2.push(temp_arr[i].split(",")[1]);
-      }
-      this.setState({askedNFTIds: arr, askedNFTContracts: arr2});
-    }
-    console.log("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=")
-    console.log("Asked NFTs: "+this.state.askedNFTIds);
-    console.log("Asked Contracts: "+this.state.askedNFTContracts);
-    console.log("Offered NFTs: "+this.state.offeredNFTIds);
-    console.log("Offered Contracts: "+this.state.offeredNFTContracts);
-  };
-
   setActivePage = (pageName) => {
     this.setState({activePage: pageName});
   };
 
-  // getContractInstance = async(NFTaddress, web3) => {
-  //   const instanceSwap = new web3.eth.Contract(
-  //     Swap.abi,
-  //     swapAddress
-  //   );
-  // };
-
-  getData = async (NFTaddress) => {
-    const {contractNFT, contractSwap } = this.state;
-    const numNFTs = await contractNFT.methods.balanceOf(NFTaddress).call();
-    const NFTdata = [];
-    // const imageURLs = [];
-    for(var i = 0; i < numNFTs; i++) {
-      var NFTId = await contractNFT.methods.tokenOfOwnerByIndex(NFTaddress, i).call();
-      NFTId = parseInt(NFTId);
-      // NFTIds.push(NFTId);
-      var res = await fetch('https://axieinfinity.com/api/v2/axies/'+String(NFTId));
-      res = await res.json();
-      // imageURLs.push(res.image);
-      
-      NFTdata.push([NFTId, res.image]);
-    }
-
-    return NFTdata;
-  };
-
-  getData2 = async (userAddress) => {
-    const {contractSwap, trackedNFTInstances, trackedNFTAddresses} = this.state;
-    console.log(trackedNFTAddresses);
-    console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=***")
-    const NFTdata = [];
-    for(var i = 0; i < trackedNFTAddresses.length; i++) {
-      var contractNFT = trackedNFTInstances[i];
-      const numNFTs = await contractNFT.methods.balanceOf(userAddress).call();
-      console.log("Found "+String(numNFTs)+ " NFTs at contract "+String(trackedNFTAddresses[i]))
-      
-      for(var j = 0; j < numNFTs; j++) {
-        var NFTId = await contractNFT.methods.tokenOfOwnerByIndex(userAddress, j).call();
-        // NFTId = parseInt(NFTId);
-        
-        var NFTname = await this.getName(NFTId, trackedNFTAddresses[i], trackedNFTAddresses);
-        var NFTimage = await this.getImageURL(NFTId, trackedNFTAddresses[i], trackedNFTAddresses);
-
-        // var NFTname = 'hi'
-        // var NFTimage = 'https://lh3.googleusercontent.com/17vU_UNWeMOVi4XOAwo4nvAXpeg1dnKPBk8VnAhJcFHOFZ9UBBvSL5Spj0ytvyfII3rdp4gHMY0mMvbnSzjdOZ0=s0'
-
-        NFTdata.push([NFTId, NFTimage, NFTname, trackedNFTAddresses[i]]);
-      }
-
-    }
-    
-    return NFTdata;
-  };
-
-  getName = async (id, address, trackedNFTAddresses) => {
-    if(address == trackedNFTAddresses[0]) {
-      return "Axie #"+String(id);
-    }
-
-    if(address == trackedNFTAddresses[1]) {
-      id = parseInt(id);
-      return "Land ("+String(id%408)+", "+String(Math.floor(id/408))+")"
-    }
-
-    if(address == trackedNFTAddresses[2]) {
-      console.log('Fetching https://api.decentraland.org/v1/parcels/'+String(id))
-      var res = await fetch('https://api.decentraland.org/v1/parcels/'+String(id));
-      res = await res.json();
-      console.log("JSON: "+res)
-      var x = res.data.x;
-      var y = res.data.y;
-      // var x = 5;
-      // var y = 5;
-      return "Land ("+String(x)+", "+String(y)+")"
-    }
-
-    return null
-  };
-
-  getImageURL = async (id, address, trackedNFTAddresses) => {
-    // console.log(trackedNFTAddresses)
-    if(address == trackedNFTAddresses[0]) {
-      var res = await fetch('https://axieinfinity.com/api/v2/axies/'+String(id));
-      res = await res.json();
-      return res.image;
-    }
-
-    if(address == trackedNFTAddresses[1]) {
-      return "https://lh3.googleusercontent.com/17vU_UNWeMOVi4XOAwo4nvAXpeg1dnKPBk8VnAhJcFHOFZ9UBBvSL5Spj0ytvyfII3rdp4gHMY0mMvbnSzjdOZ0=s0";
-    }
-
-    if(address == trackedNFTAddresses[2]) {
-      var res = await fetch('https://api.decentraland.org/v1/parcels/'+String(id));
-      res = await res.json();
-      console.log("JSON: "+String(res))
-      var x = res.data.x;
-      var y = res.data.y;
-      // var x = 5;
-      // var y = 5;
-      return "https://api.decentraland.org/v1/map.png?width=333&height=250&size=10&center="+String(x)+","+String(y)+"&selected="+String(x)+","+String(y);
-    }
-
-    return null
-    
-  };
-
   getOffers = async () => {
-    const {contractNFT, contractSwap, trackedNFTInstances, trackedNFTAddresses } = this.state;
+    const {contractSwap} = this.state;
+    var offData = null;
     const numOffers = await contractSwap.methods.offerCountByAddress(this.state.userAddress).call()
-
-    var NFTdata_2 = [];
 
     for(var i = 0; i < numOffers; i++) {
       var offerId = await contractSwap.methods.offersByAddress(this.state.userAddress, i).call()
       var offerState = await contractSwap.methods.getOfferState(offerId).call()
-      
-      var offer = await this.getOfferData(offerId)
-      var offerImages = []
-      var offerNames = []
-      var offerContracts = []
-      var url = ""
-      var name = ""
-
       var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
-      var askVal = await contractSwap.methods.getOfferAskVal(offerId).call()
-      
-      for(var j = 0; j < offer[0].length; j++) {
-        url = await this.getImageURL(String(offer[0][j]), offer[2][j], trackedNFTAddresses)
-        name = await this.getName(String(offer[0][j]), offer[2][j], trackedNFTAddresses)
-        offerImages.push(url)
-        offerNames.push(name)
-        offerContracts.push(offer[2][j])
-      }
-
-      var askImages = []
-      var askNames = []
-      var askContracts = []
-      for(var j = 0; j < offer[1].length; j++) {
-        url = await this.getImageURL(String(offer[1][j]), offer[3][j], trackedNFTAddresses)
-        name = await this.getName(String(offer[1][j]), offer[3][j], trackedNFTAddresses)
-        askImages.push(url)
-        askNames.push(name)
-        askContracts.push(offer[3][j])
-      }
-      
+      var asker = await contractSwap.methods.getOfferAsker(offerId).call()
       if(offerState) {
-        console.log("Offer Contracts: "+offerContracts)
-        console.log("Ask Contracts: "+askContracts)
-        NFTdata_2.push([offer[0], offer[1], offerImages, askImages, offerId, offVal, askVal, offerNames, askNames, offerContracts, askContracts]);
+        offData.push(offerId, offVal, asker);
       }
       
     }
-    console.log("Offer Data: "+NFTdata_2)
-    
-    return NFTdata_2
+
+    return offData
 
   };
 
   getAsks = async () => {
-    const {contractNFT, contractSwap, trackedNFTInstances, trackedNFTAddresses } = this.state;
-    const numOffers = await contractSwap.methods.offersCreatedCountByAddress(this.state.userAddress).call()
-
-    var NFTdata = [];
+    const {contractSwap} = this.state;
+    var askData = null;
+    const numOffers = await contractSwap.methods.offerCountByAddress(this.state.userAddress).call()
 
     for(var i = 0; i < numOffers; i++) {
-      var offerId = await contractSwap.methods.offersCreatedByAddress(this.state.userAddress, i).call()
+      var offerId = await contractSwap.methods.offersByAddress(this.state.userAddress, i).call()
       var offerState = await contractSwap.methods.getOfferState(offerId).call()
-      var offer = await this.getOfferData(offerId)
-      var offerImages = []
-      var offerNames = []
-      var offerContracts = []
-      var url = ""
-      var name = ""
-
       var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
-      var askVal = await contractSwap.methods.getOfferAskVal(offerId).call()
-      
-      for(var j = 0; j < offer[0].length; j++) {
-        // console.log("Offer ID: "+String(offer[0][j]))
-        // console.log("Offer Contract: "+String(offer[2][j]))
-        url = await this.getImageURL(String(offer[0][j]), offer[2][j],trackedNFTAddresses)
-        name = await this.getName(String(offer[0][j]), offer[2][j],trackedNFTAddresses)
-        offerImages.push(url)
-        offerNames.push(name)
-        offerContracts.push(offer[2][j])
-      }
-
-      var askImages = []
-      var askNames = []
-      var askContracts = []
-      for(var j = 0; j < offer[1].length; j++) {
-        url = await this.getImageURL(String(offer[1][j]), offer[3][j], trackedNFTAddresses)
-        name = await this.getName(String(offer[1][j]), offer[3][j], trackedNFTAddresses)
-        askImages.push(url)
-        askNames.push(name)
-        askContracts.push(offer[3][j])
-      }
-
+      var asker = await contractSwap.methods.getOfferOfferer(offerId).call()
       if(offerState) {
-        console.log("Offer Contracts: "+offerContracts)
-        console.log("Ask Contracts: "+askContracts)
-        NFTdata.push([offer[0], offer[1], offerImages, askImages, offerId, offVal, askVal, offerNames, askNames, offerContracts, askContracts]);
+        askData.push(offerId, offVal, asker);
       }
-
-      
       
     }
-    console.log("Ask Data: "+NFTdata)
-    
-    return NFTdata
 
-  }
+    return askData
 
-  getOfferData = async (offerId) => {
-    const {contractNFT, contractSwap} = this.state;
-
-    // Get NFT Ids being offered to user
-    const offerLength = await contractSwap.methods.getOfferLengthFromOffer(offerId).call()
-    var offerIds = []
-    var offerContracts = []
-    // const numOffers = contractSwap.methods.offerCountByAddress(this.state.userAddress)
-    for(var i = 0; i < offerLength; i++) {
-      offerIds.push (await contractSwap.methods.getOfferFromOffer(offerId, i).call())
-      offerContracts.push (await contractSwap.methods.getContractFromOffer(offerId, i).call())
-    }
-
-    // Get NFT Ids being asked of the user
-    const askLength = await contractSwap.methods.getOfferLengthFromAsk(offerId).call()
-    var askIds = []
-    var askContracts = []
-    // const numOffers = contractSwap.methods.offerCountByAddress(this.state.userAddress)
-    for(var i = 0; i < askLength; i++) {
-      askIds.push (await contractSwap.methods.getOfferFromAsk(offerId, i).call())
-      askContracts.push (await contractSwap.methods.getContractFromAsk(offerId, i).call())
-    }
-
-    return [offerIds, askIds, offerContracts, askContracts]
   }
 
   handleSubmit = async (event) => {
 
     event.preventDefault();
 
-    
-
     try {
-      const traderNFTs = await this.getData2(this.state.traderAddress);
-      this.setState({addressEntered: true, traderNFTs: traderNFTs, numTraderNFTs: traderNFTs.length});
+      this.setState({addressEntered: true});
     } catch (error) {
       this.setState({invalidAddress: true});
     }
-    
-    // console.log("Event value: "+event.target.value);
     
   };
 
@@ -582,43 +307,7 @@ class App extends Component {
     console.log("Eth offer: "+ this.state.ethOffer);
     console.log("Event value: "+event.target.value);
   };
-
-  handleEthAskChange = async (event) => {
-
-    this.setState({ethAsk: event.target.value});
-    console.log("Eth ask: "+ this.state.ethAsk);
-    console.log("Event value: "+event.target.value);
-  };
-
-  mineMint = async () => {
-    const {contractNFT, contractSwap } = this.state;
-
-    // mint random id nft for fake NFY
-    // const receipt = await contractNFT.methods.mine(this.state.userAddress, Math.floor(Math.random()*1000)).send({from:this.state.userAddress})
-    
-    // mint nft for axie contract
-    var randContract = Math.floor(Math.random()*3);
-    console.log("Rand Contract: "+String(randContract))
-    var mintContract = this.state.trackedNFTInstances[randContract];
-    console.log("Mint Contract: "+String(mintContract.address))
-    if (randContract == 0) {
-      const receipt = await mintContract.methods.mine(this.state.userAddress, Math.floor(Math.random()*100000)).send({from:this.state.userAddress})
-    } else {
-      if(randContract == 1) {
-        const receipt = await mintContract.methods.mine(this.state.userAddress, Math.floor(Math.random()*166464)).send({from:this.state.userAddress})
-      } else {
-        var id_array = [
-          "115792089237316195423570985008687907842040666557249594745166221962664778662033",
-          "32667107224410092492483962313449748299754",
-          "31986542490568215565557213098586211876843",
-          "32326824857489154029020587706017980088299",
-          "50702072671219831056042816507333463506834",
-          "115792089237316195423570985008687907848846313895668364014433714111300142890889"
-        ];
-        const receipt = await mintContract.methods.mine(this.state.userAddress, id_array[Math.floor(Math.random()*6)]).send({from:this.state.userAddress})
-      }
-    }
-  };
+  
 
   render() {
     
@@ -681,9 +370,9 @@ class App extends Component {
                   style={{maxWidth:'200px', minWidth:'200px'}}
                   value={this.state.ethOffer} 
                   id="ethoffer" 
-                  label="$ETH Offer"
+                  label="$FWB Offer"
                   type="number" 
-                  variant="outlined"  />
+                  variant="outlined"/>
               </FormGroup>
             </form>
             </Grid>

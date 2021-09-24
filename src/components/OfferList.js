@@ -28,17 +28,9 @@ function printOffers(offerArray, type, acceptTrade) {
     for(var i = 0; i < offerArray.length; i++) {
         cards.push( <Offer
             key={i}
-            offerIds={type?offerArray[i][0]:offerArray[i][1]}
-            askIds={type?offerArray[i][1]:offerArray[i][0]}
-            offerImages={type?offerArray[i][2]:offerArray[i][3]}
-            askImages={type?offerArray[i][3]:offerArray[i][2]}
-            offerId={offerArray[i][4]}
-            offerVal={type?offerArray[i][5]:offerArray[i][6]}
-            askVal={type?offerArray[i][6]:offerArray[i][5]}
-            offerNames={type?offerArray[i][7]:offerArray[i][8]}
-            askNames={type?offerArray[i][8]:offerArray[i][7]}
-            offerContracts={type?offerArray[i][9]:offerArray[i][10]}
-            askContracts={type?offerArray[i][10]:offerArray[i][9]}
+            offerId={offerArray[i][0]}
+            offerVal={offerArray[i][1]}
+            otherAddress={offerArray[i][2]}
             type={type}
             acceptTrade={acceptTrade}
             maxWidth="100%" maxHeight='20vh'
