@@ -238,7 +238,7 @@ class App extends Component {
       var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
       var asker = await contractSwap.methods.getOfferAsker(offerId).call()
       if(offerState) {
-        offData.push(offerId, offVal, asker);
+        offData.push([offerId, offVal, asker]);
       }
       
     }
@@ -263,7 +263,7 @@ class App extends Component {
       var offVal = await contractSwap.methods.getOfferOffVal(offerId).call()
       var asker = await contractSwap.methods.getOfferOfferer(offerId).call()
       if(offerState) {
-        askData.push(offerId, offVal, asker);
+        askData.push([offerId, offVal, asker]);
       }
       
     }
