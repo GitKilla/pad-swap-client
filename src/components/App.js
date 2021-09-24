@@ -151,6 +151,8 @@ class App extends Component {
 
   reloadOffers = async () => {
     var offerData = await this.getOffers();
+    console.log("Offer Data: ");
+    console.log(offerData);
     var askData = await this.getAsks();
     console.log("Offers: "+offerData)
       
@@ -226,7 +228,7 @@ class App extends Component {
 
   getOffers = async () => {
     const {contractSwap} = this.state;
-    var offData = null;
+    var offData = [];
     const numOffers = await contractSwap.methods.offerCountByAddress(this.state.userAddress).call()
 
     for(var i = 0; i < numOffers; i++) {
@@ -246,7 +248,7 @@ class App extends Component {
 
   getAsks = async () => {
     const {contractSwap} = this.state;
-    var askData = null;
+    var askData = [];
     const numOffers = await contractSwap.methods.offerCountByAddress(this.state.userAddress).call()
 
     for(var i = 0; i < numOffers; i++) {
