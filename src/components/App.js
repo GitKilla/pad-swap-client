@@ -512,8 +512,8 @@ class App extends Component {
                   justify="flex-start"
                   style={{ minHeight: '5vh'}}
                 >
-                  <Grid item style={{minWidth: '53%'}}><Typography color='secondary'>Give</Typography></Grid>
-                  <Grid item style={{minWidth: '19%'}}><Typography color='secondary'>Receive</Typography></Grid>
+                  <Grid item style={{minWidth: '63%'}}><Typography color='secondary'>Offered Address</Typography></Grid>
+                  <Grid item style={{minWidth: '19%'}}><Typography color='secondary'>$FWB</Typography></Grid>
                   </Grid>
                   <div>&nbsp;</div>
                 <Grid container
@@ -526,14 +526,14 @@ class App extends Component {
                   {this.state.inbox?
                   <OfferList
                     type={true}
-                    offerArray={this.state.offerArray}
+                    offerArray={this.state.askArray}
                     acceptTrade={this.acceptTrade}
                     >
                   </OfferList>
                   :
                   <OfferList
                     type={false}
-                    offerArray={this.state.askArray}
+                    offerArray={this.state.offerArray}
                     acceptTrade={this.cancelTrade}
                     >
                   </OfferList>
